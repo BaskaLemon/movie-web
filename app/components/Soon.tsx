@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useEffect, useState } from "react";
@@ -9,6 +8,7 @@ const API_KEY = "826f50ac875ac781d67fa627ccd5498a";
 
 export const Soon = () => {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
+  const [visibleCount, setVisibleCount] = useState(10);
 
   useEffect(() => {
     axios
@@ -24,13 +24,16 @@ export const Soon = () => {
     <div className="flex flex-col gap-6">
       <div className="flex justify-between">
         <p className="text-4xl font-bold">Upcoming</p>
-        <button className="flex justify-center items-center text-1xl gap-1.5">
+        <button
+          onClick={() => setVisibleCount((prev) => prev + 10)}
+          className="flex justify-center items-center text-1xl gap-1.5 cursor-pointer hover:opacity-60"
+        >
           See more
           <img src={"arrow-right.svg"} alt="" className="w-4 h-4" />
         </button>
       </div>
       <ul className="grid grid-cols-5 grid-rows-2 gap-4">
-        {movies.map((movie) => (
+        {movies.slice(0, visibleCount).map((movie) => (
           <li
             key={movie.id}
             className="flex flex-col items-center hover:scale-105 transition-transform"
@@ -39,7 +42,7 @@ export const Soon = () => {
               <img
                 src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt={movie.title}
-                className="rounded-t-lg shadow-md"
+                className="rounded-t-lg shadow-md cursor-pointer"
               />
             )}
 

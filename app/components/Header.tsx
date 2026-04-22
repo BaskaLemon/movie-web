@@ -13,7 +13,7 @@ export const Header = () => {
             <img src={"chevron-down.svg"} alt="" />
             <button>Genre</button>
           </div>
-          <div className="border h-9 border-stone-200 flex flex-row-reverse items-center p-1 rounded-lg shadow-3xl">
+          <div className="border h-9 border-stone-200 flex flex-row-reverse items-center p-3 rounded-lg shadow-3xl">
             <input className="w-94.75 "></input>
             <img src={"_magnifying-glass.svg"} alt="" className="w-4 h-4" />
           </div>
