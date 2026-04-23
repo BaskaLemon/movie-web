@@ -1,60 +1,90 @@
-/* eslint-disable jsx-a11y/alt-text */
-"use client";
 /* eslint-disable @next/next/no-img-element */
-
-import React, { useEffect, useState } from "react";
-import { MovieSummary } from "../type";
+"use client";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { MovieSummary } from "../type";
+
+const API_KEY = "d67d8bebd0f4ff345f6505c99e9d0289";
 
 export const Upcoming = () => {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
-  const API_KEY = "826f50ac875ac781d67fa627ccd5498a";
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`)
+      .get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`)
       .then((res) => {
         setMovies(res.data.results);
       });
   }, []);
 
-  const movie = movies[0];
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev === movies.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
+  };
+
+  if (movies.length === 0) {
+    return <div className="h-125 bg-gray-800 text-white">Loading...</div>;
+  }
+  const currentMovie = movies[currentIndex] || movies[0];
 
   return (
-    <div
-      className="flex  w-460 justify-between items-center p-10 bg-cover bg-no-repeat"
-      style={{
-        backgroundImage: movie?.backdrop_path
-          ? `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`
-          : undefined,
-      }}
-    >
-      <div className="flex flex-col justify-start items-center gap-10 w-150 pl-20">
-        {movie && (
-          <>
-            <div className="flex flex-col">
-              <p className="text-white text-xl">Now Playing:</p>
-              <p className="text-white text-4xl font-bold">
-                {movie?.title || "Loading..."}
-              </p>
-              <div className="text-white text-2xl flex items-center gap-1">
-                <img src={"star.svg"} alt="" className="h-10 w-10" />
-                {movie.vote_average.toFixed(1)}/10
-              </div>
-            </div>
-            <div className="">
-              <p className="text-white ">{movie.overview}</p>
-              <button className=" bg-white text-black px-4 py-2 mt-7 rounded flex items-center ">
-                <img src={"play.svg"} className="mr-2" />
-                Watch Trailer
-              </button>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="h-150 flex items-center">
-        <button className="w-10 h-10 bg-white rounded-full flex justify-center items-center">
-          <img src={"arrow-right.svg"} alt="" />
+    <div className="relative w-full h-250 overflow-hidden group ">
+      <div
+        className="w-full h-full bg-cover bg-center bg-zinc-800 transition-all duration-500 ease-in-out"
+        style={{
+          backgroundImage: currentMovie?.backdrop_path
+            ? `url(https://image.tmdb.org/t/p/original${currentMovie.backdrop_path})`
+            : "none",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/40">
+          <div className="absolute inset-0 flex flex-col justify-center px-20 space-y-4">
+            <p className="text-white text-sm font-semibold uppercase tracking-widest">
+              Upcoming
+            </p>
+
+            <h1 className="text-5xl font-bold text-white max-w-2xl">
+              {currentMovie.title}
+            </h1>
+
+            <p className="text-gray-200 text-lg max-w-xl line-clamp-3">
+              {currentMovie.overview}
+            </p>
+            <button className="bg-white w-fit h-fit p-2.5 rounded-xl flex items-center justify-center gap-2 hover:scale-105 transition-transform">
+              <img src={"play.svg"} alt="" />
+              Watch Trailer
+            </button>
+          </div>
+        </div>
+
+        <button
+          onClick={prevSlide}
+          className="absolute left-5 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
+        >
+          ◀
         </button>
+
+        <button
+          onClick={nextSlide}
+          className="absolute right-5 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
+        >
+          ▶
+        </button>
+
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-2">
+          {movies.slice(0, 10).map((_, index) => (
+            <div
+              key={index}
+              className={`h-2 rounded-full transition-all ${
+                index === currentIndex ? "w-8 bg-indigo-600" : "w-2 bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

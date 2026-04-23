@@ -6,7 +6,7 @@ import { MovieSummary } from "../type";
 
 const API_KEY = "826f50ac875ac781d67fa627ccd5498a";
 
-export const Soon = () => {
+export const TopRated = () => {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
   const [visibleCount, setVisibleCount] = useState(10);
 
@@ -23,7 +23,7 @@ export const Soon = () => {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex justify-between">
-        <p className="text-4xl font-bold">Upcoming</p>
+        <p className="text-4xl font-bold">Top Rated</p>
         <button
           onClick={() =>
             setVisibleCount((prev) => (prev > 10 ? 10 : prev + 10))
