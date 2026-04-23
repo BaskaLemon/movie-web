@@ -12,7 +12,7 @@ export const Upcoming = () => {
 
   useEffect(() => {
     axios
-      .get(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`)
+      .get(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`)
       .then((res) => {
         setMovies(res.data.results);
       });
@@ -27,9 +27,15 @@ export const Upcoming = () => {
   };
 
   if (movies.length === 0) {
-    return <div className="h-125 bg-gray-800 text-white">Loading...</div>;
+    return (
+      <div className="h-125 w-full bg-gray-800 items-center justify-center text-white">
+        Loading...
+      </div>
+    );
   }
   const currentMovie = movies[currentIndex] || movies[0];
+  const isNextDisabled = currentIndex >= 9;
+  const isPrevDisabled = currentIndex <= 0;
 
   return (
     <div className="relative w-full h-250 overflow-hidden group ">
@@ -63,6 +69,7 @@ export const Upcoming = () => {
 
         <button
           onClick={prevSlide}
+          disabled={isPrevDisabled}
           className="absolute left-5 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
         >
           ◀
@@ -70,6 +77,7 @@ export const Upcoming = () => {
 
         <button
           onClick={nextSlide}
+          disabled={isNextDisabled}
           className="absolute right-5 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
         >
           ▶

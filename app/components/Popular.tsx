@@ -12,9 +12,7 @@ export const Popular = () => {
 
   useEffect(() => {
     axios
-      .get(
-        `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`,
-      )
+      .get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
       .then((res) => {
         setMovies(res.data.results);
       });
