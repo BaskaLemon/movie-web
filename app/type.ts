@@ -9,6 +9,10 @@ export type MovieSummary = {
   media_type: "movie" | string;
   original_language: string;
   genre_ids: number[];
+  genres?: {
+    id: number;
+    name: string;
+  }[];
   popularity: number;
   release_date: string; // ISO date string
   video: boolean;
