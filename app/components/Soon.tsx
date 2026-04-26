@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieSummary } from "../type";
+import Link from "next/link";
 
 const API_KEY = "826f50ac875ac781d67fa627ccd5498a";
 
@@ -36,8 +37,9 @@ export const Soon = () => {
       </div>
       <ul className="grid grid-cols-5 grid-rows-2 gap-4">
         {movies.slice(0, visibleCount).map((movie) => (
-          <li
+          <Link
             key={movie.id}
+            href={`/movie/${movie.id}`}
             className="flex flex-col items-center w-75 hover:scale-105 transition-transform"
           >
             {movie.poster_path && (
@@ -57,7 +59,7 @@ export const Soon = () => {
               </div>
               {movie.title}
             </div>
-          </li>
+          </Link>
         ))}
       </ul>
     </div>
