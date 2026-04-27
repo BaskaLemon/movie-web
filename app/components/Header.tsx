@@ -72,7 +72,7 @@ export const Header = () => {
                       <p className="text-sm font-medium">{movie.title}</p>
 
                       <div className="flex items-center gap-1">
-                        <img src={"star.svg"} alt="" className="h-3 w-3" />
+                        <img src="/star.svg" alt="" className="h-3 w-3" />
                         <p className="text-yellow-500 text-xs">
                           {movie.vote_average.toFixed(1)}/10
                         </p>
