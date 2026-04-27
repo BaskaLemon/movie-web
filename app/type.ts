@@ -24,3 +24,8 @@ export type Genre = {
   id: number;
   name: string;
 };
+export type Props = {
+  params: {
+    slug: string;
+  };
+};
