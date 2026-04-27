@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieSummary } from "../type";
+import Link from "next/link";
 
 const API_KEY = "d67d8bebd0f4ff345f6505c99e9d0289";
 
@@ -60,10 +61,13 @@ export const Upcoming = () => {
             <p className="text-gray-200 text-lg max-w-xl line-clamp-3">
               {currentMovie.overview}
             </p>
-            <button className="bg-white w-fit h-fit p-2.5 rounded-xl flex items-center justify-center gap-2 hover:scale-105 transition-transform">
+            <Link
+              href={`/movie/${currentMovie.id}`}
+              className="bg-white w-fit h-fit p-2.5 rounded-xl flex items-center justify-center gap-2 hover:scale-105 transition-transform"
+            >
               <img src={"play.svg"} alt="" />
-              Watch Trailer
-            </button>
+              Watch
+            </Link>
           </div>
         </div>
 

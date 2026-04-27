@@ -1,40 +1,20 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Genre } from "../type";
+import { tmdb } from "@/lib/tmdb";
 
-const genres = [
-  "Action",
-  "Adventure",
-  "Animation",
-  "Biography",
-  "Comedy",
-  "Crime",
-  "Documentary",
-  "Drama",
-  "Family",
-  "Fantasy",
-  "Film-Noir",
-  "Game-Show",
-  "History",
-  "Horror",
-  "Music",
-  "Musical",
-  "Mystery",
-  "News",
-  "Reality-TV",
-  "Romance",
-  "Sci-Fi",
-  "Short",
-  "Sport",
-  "Talk-Show",
-  "Thriller",
-  "War",
-  "Western",
-];
-export const Genre = () => {
+export const Genres = () => {
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
+  const [genres, setGenres] = useState<Genre[]>([]);
+  useEffect(() => {
+    tmdb.get("/genre/movie/list").then((res) => {
+      setGenres(res.data.genres);
+    });
+  }, []);
+
   return (
     <div>
       <button
@@ -57,14 +37,13 @@ export const Genre = () => {
           {genres.map((genre, i) => (
             <button
               onClick={() => {
-                const slug = genre.toLowerCase().replace(/\s+/g, "-");
-
+                const slug = genre.name.toLowerCase().replace(/\s+/g, "-");
                 router.push(`/genre/${slug}`);
               }}
               key={i}
               className="border cursor-pointer hover:scale-105 transition-transform duration-300 text-xs font-semibold py-0.5 pl-2.5 pr-1 border-[#E4E4E7] rounded-full flex items-center gap-2"
             >
-              {genre}
+              {genre.name}
               <svg
                 width="16"
                 height="16"

@@ -19,3 +19,8 @@ export type MovieSummary = {
   vote_average: number;
   vote_count: number;
 };
+export type Genre = {
+  toLowerCase(): unknown;
+  id: number;
+  name: string;
+};

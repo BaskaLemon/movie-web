@@ -71,97 +71,110 @@ export default function MovieDetails() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center container">
-      <Header />
-      <div className="p-10 w-300 ">
-        <div className="flex justify-between">
-          <div>
-            <h1 className="text-3xl font-bold">{movie.title}</h1>
-            <p>
-              {movie.release_date} · {movie.original_language}
-            </p>
-          </div>
-          <div>
-            <p className="text-yellow-500 mt-2 flex items-center gap-2">
-              <img src="/star.svg" alt="" className="h-4 w-4" />
-              {movie.vote_average.toFixed(1)} / 10
-            </p>
-          </div>
-        </div>
-
-        {movie.poster_path && (
-          <div className="flex gap-10 justify-center items-center">
-            <img
-              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-              alt={movie.title}
-              className="mt-6 rounded-xs h-120"
-            />
-            <img
-              src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}
-              alt={movie.title}
-              className="mt-6 rounded-xs w-3xl h-120"
-            />
-          </div>
-        )}
-        <div className="flex gap-2 mt-2 flex-wrap">
-          {movie.genres?.map((genre) => (
-            <span
-              key={genre.id}
-              className="px-3 py-1 text-xs border border-stone-400 rounded-xl"
-            >
-              {genre.name}
-            </span>
-          ))}
-          <p className="mt-4 max-w-2x ">{movie.overview}</p>
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-13.25 mt-15 pb-4 w-290 border-b-2 border-gray-100">
-              <p className="font-bold">Director</p>
-              <p>{director?.name || "N/A"}</p>
-            </div>
-            <div className="flex gap-13.25 mt-4 pb-4 w-290 border-b-2 border-gray-100">
-              <p className="font-bold">Writers</p>
+    <div className="container">
+      <div className="flex flex-col justify-center items-center w-screen">
+        <Header />
+        <div className="p-10 w-300 ">
+          <div className="flex justify-between">
+            <div>
+              <h1 className="text-3xl font-bold">{movie.title}</h1>
               <p>
-                {writers?.length
-                  ? writers.map((w: any) => w.name).join(", ")
-                  : "N/A"}
+                {movie.release_date} · {movie.original_language}
               </p>
             </div>
-            <div className="flex gap-13.25 mt-4 pb-4 w-290 border-b-2 border-gray-100">
-              <p className="font-bold">Cast</p>
-              <p>
-                {cast?.length
-                  ? cast.map((actor: any) => actor.name).join(", ")
-                  : "N/A"}
+            <div>
+              <p className="text-yellow-500 mt-2 flex items-center gap-2">
+                <img src="/star.svg" alt="" className="h-4 w-4" />
+                {movie.vote_average.toFixed(1)} / 10
               </p>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="mt-10 w-full max-w-5xl">
-        <h2 className="text-xl font-semibold mb-4">More Like This</h2>
 
-        <div className="flex gap-4 overflow-x-auto pb-2">
-          {recommendations?.slice(0, 10).map((rec) => (
-            <Link
-              href={`/movie/${rec.id}`}
-              key={rec.id}
-              className="min-w-37.5 cursor-pointer hover:opacity-80"
-            >
-              {rec.poster_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w200${rec.poster_path}`}
-                  alt={rec.title}
-                  className="rounded-md"
-                />
-              ) : (
-                <div className="w-37.5 h-56.25 bg-gray-300 rounded-md" />
-              )}
-              <p className="text-sm mt-2">{rec.title}</p>
-            </Link>
-          ))}
+          {movie.poster_path && (
+            <div className="flex gap-10 justify-center items-center">
+              <img
+                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                alt={movie.title}
+                className="mt-6 rounded-xs h-120"
+              />
+              <img
+                src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}
+                alt={movie.title}
+                className="mt-6 rounded-xs w-3xl h-120"
+              />
+            </div>
+          )}
+          <div className="flex flex-col gap-2 mt-2">
+            <div className="flex gap-2">
+              {movie.genres?.map((genre) => (
+                <div
+                  key={genre.id}
+                  className="px-3 py-1 text-xs border border-stone-400 rounded-xl"
+                >
+                  {genre.name}
+                </div>
+              ))}
+            </div>
+            <p className="mt-4 max-w-2x ">{movie.overview}</p>
+
+            <div className="flex flex-col gap-2">
+              <div className="flex gap-13.25 mt-15 pb-4 w-290 border-b-2 border-gray-100">
+                <p className="font-bold">Director</p>
+                <p>{director?.name || "N/A"}</p>
+              </div>
+              <div className="flex gap-13.25 mt-4 pb-4 w-290 border-b-2 border-gray-100">
+                <p className="font-bold">Writers</p>
+                <p>
+                  {writers?.length
+                    ? writers.map((w: any) => w.name).join(", ")
+                    : "N/A"}
+                </p>
+              </div>
+              <div className="flex gap-13.25 mt-4 pb-4 w-290 border-b-2 border-gray-100">
+                <p className="font-bold">Cast</p>
+                <p>
+                  {cast?.length
+                    ? cast.map((actor: any) => actor.name).join(", ")
+                    : "N/A"}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+        <div className="w-290">
+          <iframe
+            src={"https://www.vidking.net/embed/movie/" + id}
+            width="100%"
+            height="600"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="mt-10 w-full max-w-5xl">
+          <h2 className="text-xl font-semibold mb-4">More Like This</h2>
+
+          <div className="flex gap-4 overflow-x-auto pb-2">
+            {recommendations?.slice(0, 10).map((rec) => (
+              <Link
+                href={`/movie/${rec.id}`}
+                key={rec.id}
+                className="min-w-37.5 cursor-pointer hover:opacity-80"
+              >
+                {rec.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200${rec.poster_path}`}
+                    alt={rec.title}
+                    className="rounded-md"
+                  />
+                ) : (
+                  <div className="w-37.5 h-56.25 bg-gray-300 rounded-md" />
+                )}
+                <p className="text-sm mt-2">{rec.title}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

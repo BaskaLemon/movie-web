@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import Link from "next/link";
-import { Genre } from "./Genre";
+import { Genres } from "./Genre";
 import { useEffect, useState } from "react";
 import { MovieSummary } from "../type";
 import axios from "axios";
@@ -43,7 +43,7 @@ export const Header = () => {
           <p className="text-indigo-500 font-bold text-[16px]">Movie Z</p>
         </Link>
         <div className="flex gap-2">
-          <Genre />
+          <Genres />
           <div className="relative border h-9 border-stone-200 flex flex-row-reverse items-center p-3 rounded-lg shadow-3xl">
             <input
               value={query}
