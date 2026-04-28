@@ -46,7 +46,7 @@ export const Popular = () => {
               />
             )}
 
-            <div className=" text-1xl font-normal pl-1.5 p-2 bg-stone-100 w-full h-fit rounded-b-lg">
+            <div className=" text-1xl font-normal pl-1.5 p-2 bg-stone-100 w-full h-fit rounded-b-lg dark:bg-gray-700">
               <div className="flex items-center gap-1">
                 <img src={"star.svg"} alt="" className="h-4 w-4" />
                 <p className="text-yellow-500 font-semibold">

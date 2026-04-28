@@ -73,14 +73,14 @@ export default function GenrePage() {
   const maxPages = Math.min(totalPages, 500);
   const pages = getPagination(page, maxPages);
   return (
-    <div className="container">
+    <div className="justify-center w-screen dark:bg-black dark:text-white ">
       <Header />
 
       <div className="w-full space-y-8 justify-start mx-50 my-20">
         <p className="font-bold text-4xl">Search filter</p>
 
         <div className="flex h-fit ">
-          <div className="border-r-2 border-stone-100 w-[30%] space-y-5 pr-4">
+          <div className="border-r-2 border-stone-100 w-[20%] space-y-5 pr-4 dark:border-gray-700">
             <div>
               <p className="font-semibold text-2xl">Genres</p>
               <p>See lists of movies by genre</p>
@@ -91,10 +91,10 @@ export default function GenrePage() {
                 <button
                   key={genre.id}
                   onClick={() => handleGenreClick(genre.id)}
-                  className={`border cursor-pointer hover:scale-105 transition-transform duration-300 text-xs font-semibold py-1 px-3 rounded-full flex items-center gap-2
+                  className={`border cursor-pointer hover:scale-105 transition-transform duration-300 text-xs font-semibold py-1 px-3 rounded-full flex items-center gap-2 dark:border-gray-700
                 ${
                   selectedGenre.includes(genre.id)
-                    ? "bg-black text-white"
+                    ? "bg-black text-white dark:bg-gray-700"
                     : "border-[#E4E4E7]"
                 }`}
                 >
@@ -104,7 +104,7 @@ export default function GenrePage() {
             </div>
             <button
               onClick={() => setSelectedGenres([])}
-              className="flex justify-center items-center text-sm  bg-stone-300 p-2 rounded-2xl cursor-pointer hover:scale-105 transition-transform"
+              className="flex justify-center items-center text-sm  bg-stone-300 p-2 rounded-2xl cursor-pointer hover:scale-105 transition-transform dark:bg-gray-700"
             >
               Clear filters
             </button>
@@ -125,7 +125,7 @@ export default function GenrePage() {
                     />
                   )}
 
-                  <div className="text-lg font-normal p-2 bg-stone-100 w-full rounded-b-lg">
+                  <div className="text-lg font-normal p-2 bg-stone-100 w-full rounded-b-lg dark:bg-gray-700">
                     <div className="flex items-center gap-1">
                       <img src="/star.svg" alt="" className="h-4 w-4" />
                       <p className="text-yellow-500 font-semibold">
@@ -141,7 +141,7 @@ export default function GenrePage() {
               <button
                 disabled={page === 1}
                 onClick={() => setPage((p) => p - 1)}
-                className="flex justify-center items-center text-sm  bg-stone-300 p-2 rounded-2xl cursor-pointer hover:scale-105 transition-transform disabled:opacity-40"
+                className="flex justify-center items-center text-sm  bg-stone-300 p-2 rounded-2xl cursor-pointer hover:scale-105 transition-transform disabled:opacity-40 dark:bg-gray-700"
               >
                 ← Previous
               </button>
@@ -156,8 +156,8 @@ export default function GenrePage() {
                     onClick={() => setPage(p)}
                     className={`px-4 py-2 rounded-xl border transition ${
                       page === p
-                        ? "bg-gray-200 border-gray-300 shadow-sm font-semibold"
-                        : "hover:bg-gray-100"
+                        ? "bg-gray-200 border-gray-300 shadow-sm font-semibold dark:bg-gray-700 dark:border-gray-700"
+                        : "hover:bg-gray-100 hover:dark:bg-gray-700"
                     }`}
                   >
                     {p}
@@ -167,7 +167,7 @@ export default function GenrePage() {
               <button
                 disabled={page === maxPages}
                 onClick={() => setPage((p) => p + 1)}
-                className="flex justify-center items-center text-sm  bg-stone-300 p-2 rounded-2xl cursor-pointer hover:scale-105 transition-transform disabled:opacity-40"
+                className="flex justify-center items-center text-sm  bg-stone-300 p-2 rounded-2xl cursor-pointer hover:scale-105 transition-transform disabled:opacity-40 dark:bg-gray-700"
               >
                 → Next
               </button>

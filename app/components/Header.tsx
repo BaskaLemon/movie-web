@@ -6,6 +6,7 @@ import { Genres } from "./Genre";
 import { useEffect, useState } from "react";
 import { MovieSummary } from "../type";
 import axios from "axios";
+import { DarkModeToggle } from "./DarkModeToggle";
 
 export const Header = () => {
   const API_KEY = "d67d8bebd0f4ff345f6505c99e9d0289";
@@ -44,7 +45,7 @@ export const Header = () => {
         </Link>
         <div className="flex gap-2">
           <Genres />
-          <div className="relative border h-9 border-stone-200 flex flex-row-reverse items-center p-3 rounded-lg shadow-3xl">
+          <div className="relative border h-9 border-stone-200 flex flex-row-reverse gap-2 items-center p-3 rounded-lg shadow-3xl dark:border-gray-700">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -86,13 +87,16 @@ export const Header = () => {
                 ))}
               </button>
             )}
-            <img src="/_magnifying-glass.svg" alt="" className="w-6 h-6 pr-2" />
+            <img
+              src="/_magnifying-glass.svg"
+              alt=""
+              className="w-5 h-5
+              "
+            />
           </div>
         </div>
         <div>
-          <button className=" border border-stone-200 w-9 h-9 rounded-lg flex justify-center items-center hover:scale-105 transition-transform cursor-pointer">
-            <img src="/moon.svg" alt="" />
-          </button>
+          <DarkModeToggle />
         </div>
       </div>
     </div>

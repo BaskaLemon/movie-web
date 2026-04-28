@@ -63,7 +63,7 @@ export const Upcoming = () => {
             </p>
             <Link
               href={`/movie/${currentMovie.id}`}
-              className="bg-white w-fit h-fit p-2.5 rounded-xl flex items-center justify-center gap-2 hover:scale-105 transition-transform"
+              className="bg-white w-fit h-fit p-2.5 rounded-xl flex items-center justify-center gap-2 hover:scale-105 transition-transform dark:text-black"
             >
               <img src={"play.svg"} alt="" />
               Watch

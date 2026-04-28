@@ -21,18 +21,18 @@ export const Genres = () => {
         onClick={() => {
           setIsVisible(!isVisible);
         }}
-        className="w-24.25 h-9 px-4 py-2 border border-stone-200 shadow-3xl items-center flex justify-center rounded-lg gap-2 cursor-pointer hover:scale-105 transition-transform"
+        className="w-24.25 h-9 px-4 py-2 border border-stone-200 shadow-3xl items-center flex justify-center rounded-lg gap-2 cursor-pointer hover:scale-105 transition-transform dark:border-gray-700"
       >
         <img src="/chevron-down.svg" alt="" />
         Genre
       </button>
       <div
         data-shown={isVisible}
-        className={`absolute z-10 duration-300  p-5 bg-white border border-[#E4E4E7] rounded-lg mt-1 data-[shown=true]:visible data-[shown=true]:opacity-100 invisible opacity-0`}
+        className={`absolute z-10 duration-300  p-5 bg-white border border-[#E4E4E7] rounded-lg mt-1 data-[shown=true]:visible data-[shown=true]:opacity-100 invisible opacity-0 dark:bg-black dark:text-white dark:border-gray-700 `}
       >
-        <div className="mt-1 font-semibold text-2xl text-[#09090B]">Genres</div>
-        <div className="text-[#09090B]">See lists of movies by genre</div>
-        <hr className="border border-[#E4E4E7] my-4" />
+        <div className="mt-1 font-semibold text-2xl ">Genres</div>
+        <div>See lists of movies by genre</div>
+        <hr className="border border-[#E4E4E7] my-4 dark:dark:border-gray-700" />
         <div className="flex flex-wrap gap-4 max-w-135">
           {genres.map((genre, i) => (
             <button
@@ -41,23 +41,9 @@ export const Genres = () => {
                 router.push(`/genre/${slug}`);
               }}
               key={i}
-              className="border cursor-pointer hover:scale-105 transition-transform duration-300 text-xs font-semibold py-0.5 pl-2.5 pr-1 border-[#E4E4E7] rounded-full flex items-center gap-2"
+              className="border cursor-pointer hover:scale-105 transition-transform duration-300 text-xs font-semibold py-0.5 pl-2.5 pr-2  border-[#E4E4E7] rounded-full flex items-center gap-2 dark:border-gray-700"
             >
               {genre.name}
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M6 12L10 8L6 4"
-                  stroke="#09090B"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
             </button>
           ))}
         </div>
