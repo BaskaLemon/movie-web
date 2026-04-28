@@ -92,12 +92,12 @@ export default function MovieDetails() {
         {movie.poster_path && (
           <div className="flex gap-10 justify-center items-center">
             <img
-              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
               alt={movie.title}
               className="mt-6 rounded-xs h-120"
             />
             <img
-              src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               alt={movie.title}
               className="mt-6 rounded-xs w-3xl h-120"
             />
