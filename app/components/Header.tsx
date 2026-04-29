@@ -7,12 +7,14 @@ import { useEffect, useState } from "react";
 import { MovieSummary } from "../type";
 import axios from "axios";
 import { DarkModeToggle } from "./DarkModeToggle";
+import { useTheme } from "./ThemeContext";
 
 export const Header = () => {
   const API_KEY = "d67d8bebd0f4ff345f6505c99e9d0289";
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<MovieSummary[]>([]);
   const [loading, setLoading] = useState(false);
+  const { dark } = useTheme();
 
   useEffect(() => {
     if (!query.trim()) {
@@ -53,17 +55,17 @@ export const Header = () => {
               className="w-94.75 outline-none"
             />
             {(results.length > 0 || loading) && (
-              <button className="absolute top-8 bg-white mt-2 w-full shadow-lg rounded-lg max-h-60 overflow-y-auto z-20">
+              <button className="absolute top-8 bg-white mt-2 w-full shadow-lg rounded-lg max-h-60 overflow-y-auto z-20 dark:bg-black">
                 {loading && <p className="p-3 text-gray-500">Searching...</p>}
                 {results.slice(0, 5).map((movie) => (
                   <Link
                     key={movie.id}
                     href={`/movie/${movie.id}`}
-                    className="p-2 flex items-center gap-2.5 hover:bg-gray-100 cursor-pointer"
+                    className="p-2 flex items-center gap-2.5 hover:bg-gray-100 cursor-pointer dark:hover:bg-gray-700"
                   >
                     {movie.poster_path && (
                       <img
-                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                         alt={movie.title}
                         className="w-12 h-16 rounded shadow-md"
                       />
@@ -87,12 +89,15 @@ export const Header = () => {
                 ))}
               </button>
             )}
-            <img
-              src="/_magnifying-glass.svg"
-              alt=""
-              className="w-5 h-5
-              "
-            />
+            {dark ? (
+              <img
+                src="/_magnifying-glass (1).svg"
+                alt=""
+                className="w-5 h-5"
+              />
+            ) : (
+              <img src="/_magnifying-glass.svg" alt="" className="w-5 h-5" />
+            )}
           </div>
         </div>
         <div>

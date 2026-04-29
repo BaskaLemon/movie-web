@@ -1,32 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
-
-import { useEffect, useState } from "react";
+import { useTheme } from "./ThemeContext";
 
 export const DarkModeToggle = () => {
-  const [dark, setDark] = useState(false);
-
-  useEffect(() => {
-    const isDark = localStorage.getItem("theme") === "dark";
-    setDark(isDark);
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggle = () => {
-    const newDark = !dark;
-    setDark(newDark);
-
-    if (newDark) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+  const { dark, toggle } = useTheme();
 
   return (
     <button

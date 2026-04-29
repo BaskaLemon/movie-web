@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieSummary } from "../type";
 import Link from "next/link";
+import { useTheme } from "./ThemeContext";
 
 const API_KEY = "826f50ac875ac781d67fa627ccd5498a";
 
 export const Soon = () => {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
   const [visibleCount, setVisibleCount] = useState(10);
+  const { dark } = useTheme();
 
   useEffect(() => {
     axios
@@ -32,7 +34,11 @@ export const Soon = () => {
           className="flex justify-center items-center gap-1.5 cursor-pointer hover:opacity-60"
         >
           {visibleCount > 10 ? "See less" : "See more"}
-          <img src={"arrow-right.svg"} alt="" className="w-4 h-4" />
+          {dark ? (
+            <img src="arrow-right (1).svg" alt="" className="w-4 h-4" />
+          ) : (
+            <img src={"arrow-right.svg"} alt="" className="w-4 h-4" />
+          )}
         </button>
       </div>
       <ul className="grid grid-cols-5 grid-rows-2 gap-4">
@@ -44,7 +50,7 @@ export const Soon = () => {
           >
             {movie.poster_path && (
               <img
-                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                 alt={movie.title}
                 className="rounded-t-lg shadow-md cursor-pointer"
               />

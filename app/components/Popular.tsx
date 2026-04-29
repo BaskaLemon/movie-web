@@ -3,12 +3,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { MovieSummary } from "../type";
+import { useTheme } from "./ThemeContext";
+import Link from "next/link";
 
 const API_KEY = "826f50ac875ac781d67fa627ccd5498a";
 
 export const Popular = () => {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
   const [visibleCount, setVisibleCount] = useState(10);
+  const { dark } = useTheme();
 
   useEffect(() => {
     axios
@@ -29,18 +32,23 @@ export const Popular = () => {
           className="flex justify-center items-center gap-1.5 cursor-pointer hover:opacity-60"
         >
           {visibleCount > 10 ? "See less" : "See more"}
-          <img src={"arrow-right.svg"} alt="" className="w-4 h-4" />
+          {dark ? (
+            <img src="arrow-right (1).svg" alt="" className="w-4 h-4" />
+          ) : (
+            <img src={"arrow-right.svg"} alt="" className="w-4 h-4" />
+          )}
         </button>
       </div>
       <ul className="grid grid-cols-5 grid-rows-2 gap-4">
         {movies.slice(0, visibleCount).map((movie) => (
-          <li
+          <Link
             key={movie.id}
+            href={`/movie/${movie.id}`}
             className="flex flex-col items-center w-75 hover:scale-105 transition-transform"
           >
             {movie.poster_path && (
               <img
-                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                 alt={movie.title}
                 className="rounded-t-lg shadow-md cursor-pointer"
               />
@@ -55,7 +63,7 @@ export const Popular = () => {
               </div>
               {movie.title}
             </div>
-          </li>
+          </Link>
         ))}
       </ul>
     </div>

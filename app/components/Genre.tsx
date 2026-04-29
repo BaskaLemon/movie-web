@@ -4,11 +4,13 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Genre } from "../type";
 import { tmdb } from "@/lib/tmdb";
+import { useTheme } from "./ThemeContext";
 
 export const Genres = () => {
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
   const [genres, setGenres] = useState<Genre[]>([]);
+  const { dark } = useTheme();
   useEffect(() => {
     tmdb.get("/genre/movie/list").then((res) => {
       setGenres(res.data.genres);
@@ -23,7 +25,11 @@ export const Genres = () => {
         }}
         className="w-24.25 h-9 px-4 py-2 border border-stone-200 shadow-3xl items-center flex justify-center rounded-lg gap-2 cursor-pointer hover:scale-105 transition-transform dark:border-gray-700"
       >
-        <img src="/chevron-down.svg" alt="" />
+        {dark ? (
+          <img src="/chevron-down (1).svg" alt="" />
+        ) : (
+          <img src="/chevron-down.svg" alt="" />
+        )}
         Genre
       </button>
       <div
