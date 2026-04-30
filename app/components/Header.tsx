@@ -57,7 +57,7 @@ export const Header = () => {
             {(results.length > 0 || loading) && (
               <button className="absolute top-8 bg-white mt-2 w-full shadow-lg rounded-lg max-h-60 overflow-y-auto z-20 dark:bg-black">
                 {loading && <p className="p-3 text-gray-500">Searching...</p>}
-                {results.slice(0, 5).map((movie) => (
+                {results.slice(0, 20).map((movie) => (
                   <Link
                     key={movie.id}
                     href={`/movie/${movie.id}`}

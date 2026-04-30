@@ -41,7 +41,7 @@ export const Soon = () => {
           )}
         </button>
       </div>
-      <ul className="grid grid-cols-5 grid-rows-2 gap-4">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {movies.slice(0, visibleCount).map((movie) => (
           <Link
             key={movie.id}
