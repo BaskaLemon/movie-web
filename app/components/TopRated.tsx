@@ -10,7 +10,7 @@ const API_KEY = "826f50ac875ac781d67fa627ccd5498a";
 
 export const TopRated = () => {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
-  const [visibleCount, setVisibleCount] = useState(10);
+
   const { dark } = useTheme();
 
   useEffect(() => {
@@ -25,22 +25,20 @@ export const TopRated = () => {
     <div className="flex flex-col gap-6">
       <div className="flex justify-between">
         <p className="text-4xl font-bold">Top Rated</p>
-        <button
-          onClick={() =>
-            setVisibleCount((prev) => (prev > 10 ? 10 : prev + 10))
-          }
+        <Link
+          href={"/topRated"}
           className="flex justify-center items-center gap-1.5 cursor-pointer hover:opacity-60"
         >
-          {visibleCount > 10 ? "See less" : "See more"}
+          See more
           {dark ? (
             <img src="arrow-right (1).svg" alt="" className="w-4 h-4" />
           ) : (
             <img src={"arrow-right.svg"} alt="" className="w-4 h-4" />
           )}
-        </button>
+        </Link>
       </div>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-        {movies.slice(0, visibleCount).map((movie) => (
+        {movies.slice(0, 10).map((movie) => (
           <Link
             key={movie.id}
             href={`/movie/${movie.id}`}

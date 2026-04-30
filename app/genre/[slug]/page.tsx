@@ -169,7 +169,7 @@ export default function GenrePage() {
                 onClick={() => setPage((p) => p + 1)}
                 className="flex justify-center items-center text-sm  bg-stone-300 p-2 rounded-2xl cursor-pointer hover:scale-105 transition-transform disabled:opacity-40 dark:bg-gray-700"
               >
-                → Next
+                Next →
               </button>
             </div>
           </div>
