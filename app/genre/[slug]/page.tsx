@@ -76,10 +76,10 @@ export default function GenrePage() {
     <div className="justify-center w-screen dark:bg-black dark:text-white ">
       <Header />
 
-      <div className="w-full space-y-8 justify-start mx-50 my-20">
+      <div className=" space-y-8 justify-start mx-50 my-20">
         <p className="font-bold text-4xl">Search filter</p>
 
-        <div className="flex h-fit ">
+        <div className="flex h-fit w-8xl ">
           <div className="border-r-2 border-stone-100 w-[20%] space-y-5 pr-4 dark:border-gray-700">
             <div>
               <p className="font-semibold text-2xl">Genres</p>
