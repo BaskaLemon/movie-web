@@ -57,12 +57,12 @@ export default function Popular() {
   return (
     <div className="flex flex-col justify-center items-center gap-20 dark:bg-black dark:text-white ">
       <Header />
-      <div className="container">
+      <div>
         <div className="flex justify-between mb-8">
           <p className="text-4xl font-bold">Popular</p>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {movies.slice(0, 10).map((movie) => (
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-4 w-fit items-center justify-center">
+          {movies.slice(0, 12).map((movie) => (
             <Link
               key={movie.id}
               href={`/movie/${movie.id}`}

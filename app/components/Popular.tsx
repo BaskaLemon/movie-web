@@ -36,8 +36,8 @@ export const Popular = () => {
           )}
         </Link>
       </div>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-        {movies.slice(0, 10).map((movie) => (
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {movies.slice(0, 12).map((movie) => (
           <Link
             key={movie.id}
             href={`/movie/${movie.id}`}
@@ -45,7 +45,7 @@ export const Popular = () => {
           >
             {movie.poster_path && (
               <img
-                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                 alt={movie.title}
                 className="rounded-t-lg shadow-md cursor-pointer"
               />

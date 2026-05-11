@@ -9,7 +9,6 @@ import { Footer } from "../components/Footer";
 
 export default function Upcoming() {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
-  const [visibleCount] = useState(10);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -58,12 +57,12 @@ export default function Upcoming() {
   return (
     <div className="flex flex-col justify-center items-center gap-20 dark:bg-black dark:text-white ">
       <Header />
-      <div className="container">
+      <div>
         <div className="flex justify-between mb-8">
           <p className="text-4xl font-bold">Upcoming</p>
         </div>
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {movies.slice(0, visibleCount).map((movie) => (
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-4 w-fit items-center justify-center">
+          {movies.slice(0, 12).map((movie) => (
             <Link
               key={movie.id}
               href={`/movie/${movie.id}`}
@@ -71,7 +70,7 @@ export default function Upcoming() {
             >
               {movie.poster_path && (
                 <img
-                  src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                  src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                   alt={movie.title}
                   className="rounded-t-lg shadow-md cursor-pointer"
                 />

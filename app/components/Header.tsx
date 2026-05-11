@@ -8,6 +8,7 @@ import { MovieSummary } from "../type";
 import axios from "axios";
 import { DarkModeToggle } from "./DarkModeToggle";
 import { useTheme } from "./ThemeContext";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
   const API_KEY = "d67d8bebd0f4ff345f6505c99e9d0289";
@@ -15,6 +16,8 @@ export const Header = () => {
   const [results, setResults] = useState<MovieSummary[]>([]);
   const [loading, setLoading] = useState(false);
   const { dark } = useTheme();
+  const router = useRouter();
+  const slug = query;
 
   useEffect(() => {
     if (!query.trim()) {
@@ -38,6 +41,12 @@ export const Header = () => {
     return () => clearTimeout(timeout);
   }, [query]);
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && query.trim()) {
+      router.push(`/search/${query}`);
+    }
+  };
+
   return (
     <div className=" w-screen justify-center items-center flex ">
       <div className="flex h-14.75 w-375 justify-between items-center p-4">
@@ -53,6 +62,7 @@ export const Header = () => {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search movies..."
               className="w-94.75 outline-none"
+              onKeyDown={handleKeyDown}
             />
             {(results.length > 0 || loading) && (
               <button className="absolute top-8 bg-white mt-2 w-full shadow-lg rounded-lg max-h-60 overflow-y-auto z-20 dark:bg-black">
@@ -65,7 +75,7 @@ export const Header = () => {
                   >
                     {movie.poster_path && (
                       <img
-                        src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
                         alt={movie.title}
                         className="w-12 h-16 rounded shadow-md"
                       />
@@ -90,13 +100,17 @@ export const Header = () => {
               </button>
             )}
             {dark ? (
-              <img
-                src="/_magnifying-glass (1).svg"
-                alt=""
-                className="w-5 h-5"
-              />
+              <Link href={`/search/${slug}`}>
+                <img
+                  src="/_magnifying-glass (1).svg"
+                  alt=""
+                  className="w-5 h-5"
+                />
+              </Link>
             ) : (
-              <img src="/_magnifying-glass.svg" alt="" className="w-5 h-5" />
+              <Link href={`/search/${slug}`}>
+                <img src="/_magnifying-glass.svg" alt="" className="w-5 h-5" />
+              </Link>
             )}
           </div>
         </div>
