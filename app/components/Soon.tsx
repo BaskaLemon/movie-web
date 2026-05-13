@@ -38,12 +38,12 @@ export const Soon = () => {
           )}
         </Link>
       </div>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-4">
         {movies.slice(0, 12).map((movie) => (
           <Link
             key={movie.id}
             href={`/movie/${movie.id}`}
-            className="flex flex-col items-center w-75 hover:scale-105 transition-transform"
+            className="flex flex-col items-center w-60 hover:scale-105 transition-transform"
           >
             {movie.poster_path && (
               <img
