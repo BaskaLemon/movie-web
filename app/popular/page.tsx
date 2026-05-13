@@ -6,15 +6,19 @@ import Link from "next/link";
 import { Header } from "../components/Header";
 import { tmdb } from "@/lib/tmdb";
 import { Footer } from "../components/Footer";
+import { MovieCardSkeleton } from "../components/Skeleton";
 
 export default function Popular() {
   const [movies, setMovies] = useState<MovieSummary[]>([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
+        setLoading(true);
+
         const url = "/movie/popular";
 
         const safePage = Math.max(1, Math.min(page, 500));
@@ -29,6 +33,8 @@ export default function Popular() {
         setTotalPages(total);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -62,31 +68,35 @@ export default function Popular() {
           <p className="text-4xl font-bold">Popular</p>
         </div>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-4 w-fit items-center justify-center">
-          {movies.slice(0, 12).map((movie) => (
-            <Link
-              key={movie.id}
-              href={`/movie/${movie.id}`}
-              className="flex flex-col items-center w-75 hover:scale-105 transition-transform"
-            >
-              {movie.poster_path && (
-                <img
-                  src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                  alt={movie.title}
-                  className="rounded-t-lg shadow-md cursor-pointer"
-                />
-              )}
+          {loading ? (
+            <MovieCardSkeleton count={12} />
+          ) : (
+            movies.slice(0, 12).map((movie) => (
+              <Link
+                key={movie.id}
+                href={`/movie/${movie.id}`}
+                className="flex flex-col items-center w-75 hover:scale-105 transition-transform"
+              >
+                {movie.poster_path && (
+                  <img
+                    src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    alt={movie.title}
+                    className="rounded-t-lg shadow-md cursor-pointer"
+                  />
+                )}
 
-              <div className=" text-1xl font-normal pl-1.5 p-2 bg-stone-100 w-full h-fit rounded-b-lg dark:bg-gray-700">
-                <div className="flex items-center gap-1">
-                  <img src={"star.svg"} alt="" className="h-4 w-4" />
-                  <p className="text-yellow-500 font-semibold">
-                    {movie.vote_average.toFixed(1)}/10
-                  </p>
+                <div className=" text-1xl font-normal pl-1.5 p-2 bg-stone-100 w-full h-fit rounded-b-lg dark:bg-gray-700">
+                  <div className="flex items-center gap-1">
+                    <img src={"star.svg"} alt="" className="h-4 w-4" />
+                    <p className="text-yellow-500 font-semibold">
+                      {movie.vote_average.toFixed(1)}/10
+                    </p>
+                  </div>
+                  {movie.title}
                 </div>
-                {movie.title}
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          )}
         </ul>
         <div className="w-full flex items-center justify-center gap-2 mt-10 mb-10">
           <button
