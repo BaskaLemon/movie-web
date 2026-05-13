@@ -39,7 +39,7 @@ export const Upcoming = () => {
   const isPrevDisabled = currentIndex <= 0;
 
   return (
-    <div className="relative w-full h-250 overflow-hidden group ">
+    <div className="relative w-full h-200 overflow-hidden group ">
       <div
         className="w-full h-full bg-cover bg-center bg-zinc-800 transition-all duration-500 ease-in-out"
         style={{
